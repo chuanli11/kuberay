@@ -34,7 +34,7 @@ spec:
     # imagePullPolicy optionally overrides the autoscaler container's image pull policy.
     imagePullPolicy: Always
     # Optionally specify the autoscaler container's securityContext.
-    securityContext: {}
+    # securityContext: {}
     env: []
     envFrom: []
     # resources specifies optional resource request and limit overrides for the autoscaler container.
@@ -65,7 +65,7 @@ spec:
         containers:
         # The Ray head container
         - name: ray-head
-          image: rayproject/ray:2.2.0
+          image: rayproject/ray-ml:2.2.0
           imagePullPolicy: Always
           ports:
           - containerPort: 6379
@@ -128,7 +128,7 @@ spec:
           command: ['sh', '-c', "until nslookup $RAY_IP.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for K8s Service $RAY_IP; sleep 2; done"]
         containers:
         - name: ray-worker
-          image: rayproject/ray:2.2.0
+          image: rayproject/ray-ml:2.2.0
           lifecycle:
             preStop:
               exec:
